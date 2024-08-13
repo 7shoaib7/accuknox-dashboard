@@ -23,8 +23,9 @@ import "./drawer.css"
 import { addWidget, removeWidget, selectCategories } from '../../redux/dashboardSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
-const AddWidgetDrawer = ({ drawerOpen, toggleDrawer }) => {
-    const categories = useSelector(selectCategories);
+const AddWidgetDrawer = React.memo(({ drawerOpen, toggleDrawer ,filteredWidgets}) => {
+    // const categories = useSelector(selectCategories);
+    const categories = filteredWidgets
     const dispatch = useDispatch();
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'))
@@ -66,7 +67,7 @@ const AddWidgetDrawer = ({ drawerOpen, toggleDrawer }) => {
 
 
     const handleCloseDrawer = () => {
-        setFormVisible(false);
+        handleCancel()
         toggleDrawer()
     }
 
@@ -168,6 +169,6 @@ const AddWidgetDrawer = ({ drawerOpen, toggleDrawer }) => {
             </Box>
         </Drawer>
     )
-}
+})
 
 export default AddWidgetDrawer

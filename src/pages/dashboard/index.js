@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 //css
 import "./dashboard.css"
 import SearchTextField from '../../components/SearchTextField'
@@ -12,17 +12,30 @@ import AddWidgetDrawer from '../../components/AddWidgetDrawer';
 //redux
 import { useSelector } from 'react-redux';
 import { selectCategories } from "../../redux/dashboardSlice"
+//custom
+import useDebounce from '../../custom/useDebounce';
 
 
 
 const HomeDashboard = () => {
     const categories = useSelector(selectCategories);
     const [drawerOpen, setDrawerOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
     const toggleDrawer = () => {
         setDrawerOpen(!drawerOpen);
     };
 
+    // Filter widgets based on the search query
+    const filteredWidgets = useMemo(() => {
+        return categories.map((category) => ({
+            ...category,
+            widgets: category.widgets.filter((widget) =>
+                widget.name.toLowerCase().includes(debouncedSearchQuery.toLowerCase())
+            )
+        }));
+    }, [categories, debouncedSearchQuery]);
 
     return (
         <>
@@ -30,8 +43,8 @@ const HomeDashboard = () => {
                 <div className="dashboard-search">
                     <SearchTextField
                         placeholder="Search anything..."
-                        // value={searchValue}
-                        // onChange={handleChange}
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
                         width="20rem"
                     />
                 </div>
@@ -52,7 +65,7 @@ const HomeDashboard = () => {
                 </div>
 
                 <div className="dashboard-category-widgets">
-                    {categories.map((category) => (
+                    {filteredWidgets.map((category) => (
                         <div key={category.id}>
                             <div className="dashboard-category">
                                 <h5 className="category-name">{category.name}</h5>
@@ -67,9 +80,13 @@ const HomeDashboard = () => {
                                     padding: '10px',
                                 }}
                             >
-                                {category.widgets.map((widget) => (
-                                    <Widget key={widget.id} widget={widget} />
-                                ))}
+                                {category.widgets.length > 0 ? (
+                                    category.widgets.map((widget) => (
+                                        <Widget key={widget.id} widget={widget} />
+                                    ))
+                                ) : (
+                                    <p>No widgets found</p>
+                                )}
                                 <div className="add-widgets" onClick={toggleDrawer}>
                                     <div className="add-widget-btn">
                                         <AddIcon className='add-widget-icon' />
@@ -81,7 +98,7 @@ const HomeDashboard = () => {
                     ))}
                 </div>
             </div>
-            <AddWidgetDrawer drawerOpen={drawerOpen} toggleDrawer={toggleDrawer} />
+            <AddWidgetDrawer drawerOpen={drawerOpen} toggleDrawer={toggleDrawer} filteredWidgets={filteredWidgets}/>
         </>
     )
 }
