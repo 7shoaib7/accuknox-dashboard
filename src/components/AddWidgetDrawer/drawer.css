@@ -1,0 +1,33 @@
+.drawer-app-bar-header{
+   background-color: #080f53 !important;
+}
+
+.app-bar-header-title{
+    font-size:1rem !important
+}
+
+.drawer-app-bar-header-description{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.drawer-description{
+    font-size: 1rem !important;
+    margin:1rem 1rem 0 1rem !important;
+}
+
+.drawer-tab-content{
+    padding:2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.tab-content-widget-list{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border:1px lightgray solid;
+}
