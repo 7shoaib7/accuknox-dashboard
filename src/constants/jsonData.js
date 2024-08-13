@@ -8,12 +8,14 @@ const dashBoardData = {
           {
             "id": "widget-1",
             "name": "Cloud Accounts",
-            "text": "Cloud Accounts Overview widget"
+            "text": "Cloud Accounts Overview widget",
+            "checked": true
           },
           {
             "id": "widget-2",
             "name": "Cloud Account Risk Assessment",
-            "text": "Cloud Account Risk Assessment Overview widget"
+            "text": "Cloud Account Risk Assessment Overview widget",
+            "checked": true
           },
         ]
       },
@@ -25,12 +27,14 @@ const dashBoardData = {
           {
             "id": "widget-3",
             "name": "Top 5 Namespace Specific Alerts",
-            "text": "Top 5 Namespace Specific Alerts overview"
+            "text": "Top 5 Namespace Specific Alerts overview",
+            "checked": true
           },
           {
             "id": "widget-4",
             "name": "Workload Alerts",
-            "text": "Workload Alerts overview"
+            "text": "Workload Alerts overview",
+            "checked": true
           }
         ]
       },
@@ -42,12 +46,14 @@ const dashBoardData = {
           {
             "id": "widget-5",
             "name": "Image Risk Assessment",
-            "text": "Image Risk Assessment overview"
+            "text": "Image Risk Assessment overview",
+            "checked": true
           },
           {
             "id": "widget-6",
             "name": "Image Security Issues",
-            "text": "Image Security Issues overview"
+            "text": "Image Security Issues overview",
+            "checked": true
           },
         ]
       },

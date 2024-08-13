@@ -6,17 +6,19 @@ import SearchTextField from '../../components/SearchTextField'
 import AddIcon from '@mui/icons-material/Add';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SyncIcon from '@mui/icons-material/Sync';
-//jsonData
-import dashBoardData from '../../constants/jsonData';
 //compoonents
 import Widget from '../../components/Widget';
 import AddWidgetDrawer from '../../components/AddWidgetDrawer';
+//redux
+import { useSelector } from 'react-redux';
+import { selectCategories } from "../../redux/dashboardSlice"
 
 
 
 const HomeDashboard = () => {
+    const categories = useSelector(selectCategories);
     const [drawerOpen, setDrawerOpen] = useState(false);
-   
+
     const toggleDrawer = () => {
         setDrawerOpen(!drawerOpen);
     };
@@ -50,7 +52,7 @@ const HomeDashboard = () => {
                 </div>
 
                 <div className="dashboard-category-widgets">
-                    {dashBoardData.categories.map((category) => (
+                    {categories.map((category) => (
                         <div key={category.id}>
                             <div className="dashboard-category">
                                 <h5 className="category-name">{category.name}</h5>
@@ -79,7 +81,7 @@ const HomeDashboard = () => {
                     ))}
                 </div>
             </div>
-            <AddWidgetDrawer drawerOpen={drawerOpen} toggleDrawer={toggleDrawer}/>
+            <AddWidgetDrawer drawerOpen={drawerOpen} toggleDrawer={toggleDrawer} />
         </>
     )
 }

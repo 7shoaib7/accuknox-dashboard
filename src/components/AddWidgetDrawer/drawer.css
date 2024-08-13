@@ -13,7 +13,7 @@
     padding: 1rem;
 }
 
-.drawer-description{
+.drawer-description,.add-widget-form-heading{
     font-size: 1rem !important;
     margin:1rem 1rem 0 1rem !important;
 }
@@ -27,7 +27,17 @@
 
 .tab-content-widget-list{
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border:1px lightgray solid;
+}
+
+.tab-content-widget-list-right{
+    display: flex;
     align-items: center;
     gap: 0.5rem;
-    border:1px lightgray solid;
+}
+
+.add-new-widget-form{
+    padding:2rem;
 }
